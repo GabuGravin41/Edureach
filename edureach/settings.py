@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "crispy_tailwind",
     # apps for allauth
     'django.contrib.sites',
+    "allauth_ui",
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -190,9 +191,9 @@ LOGIN_REDIRECT_URL = "/accounts/email/"
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": config("DJANGO_GOOGLE_CLIENT_ID", default=""),
-            "secret": config("DJANGO_GOOGLE_SECRET", default=""),
-            "key": config("DJANGO_GOOGLE_KEY", default=""),
+            "client_id": os.getenv('GOOGLE_OAUTH_CLIENT_ID'),
+            "secret": os.getenv('GOOGLE_OAUTH_CLIENT_SECRET'),
+            "key": "",
         }
     },
 }
@@ -205,3 +206,6 @@ LOGIN_REDIRECT_URL = "/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "media/"
+
+GOOGLE_OAUTH_CLIENT_ID = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
+GOOGLE_OAUTH_CLIENT_SECRET = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
